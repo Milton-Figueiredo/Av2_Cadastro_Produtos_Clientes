@@ -1,0 +1,79 @@
+<div class="flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white py-4 px-6 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-semibold">Cadastro de Produtos</h1>
+      <nav class="flex space-x-4">
+        <a (click)="irParaCliente()">Clientes</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow bg-gray-100 py-8 px-4">
+    <div class="container mx-auto">
+      <!-- Form -->
+      <form (ngSubmit)="onSaveProduct()">
+        <div class="login-container">
+          <div>
+            <label for="name" class="block text-gray-700 font-medium mb-1">Nome do Produto</label>
+            <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+          </div>
+          <div>
+            <label for="description" class="block text-gray-700 font-medium mb-1">Descrição</label>
+            <textarea id="description" [(ngModel)]="newProduct.description" name="description" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required></textarea>
+          </div>
+          <div>
+            <label for="purchasePrice" class="block text-gray-700 font-medium mb-1">Valor de Compra</label>
+            <input type="number" id="purchasePrice" [(ngModel)]="newProduct.purchasePrice" name="purchasePrice" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+          </div>
+          <div>
+            <label for="salePrice" class="block text-gray-700 font-medium mb-1">Valor de Venda</label>
+            <input type="number" id="salePrice" [(ngModel)]="newProduct.salePrice" name="salePrice" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+          </div>
+          <div>
+            <label for="stock" class="block text-gray-700 font-medium mb-1">Quantidade em Estoque</label>
+            <input type="number" id="stock" [(ngModel)]="newProduct.stock" name="stock" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+          </div>
+          <div>
+            <label for="brand" class="block text-gray-700 font-medium mb-1">Marca</label>
+            <input type="text" id="brand" [(ngModel)]="newProduct.brand" name="brand" class="border border-gray-300 rounded-lg py-2 px-4 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+          </div>
+        </div>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg mt-6">Salvar</button>
+      </form>
+
+      <!-- Registered Products -->
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Produtos Cadastrados</h2>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="table-auto min-w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Nome</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Descrição</th>
+              <th class="py-3 px-4 text-right font-medium text-gray-700">Valor de Compra</th>
+              <th class="py-3 px-4 text-right font-medium text-gray-700">Valor de Venda</th>
+              <th class="py-3 px-4 text-right font-medium text-gray-700">Estoque</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Marca</th>
+              <th class="py-3 px-4 text-center font-medium text-gray-700">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products; let i = index" class="border-t">
+              <td class="py-3 px-4">{{ product.name }}</td>
+              <td class="py-3 px-4">{{ product.description }}</td>
+              <td class="py-3 px-4 text-right">{{ product.purchasePrice | currency:'BRL' }}</td>
+              <td class="py-3 px-4 text-right">{{ product.salePrice | currency:'BRL' }}</td>
+              <td class="py-3 px-4 text-right">{{ product.stock }}</td>
+              <td class="py-3 px-4">{{ product.brand }}</td>
+              <td class="py-3 px-4 text-center">
+                <button (click)="onEditProduct(product)" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-1 px-3 rounded mr-2">Editar</button>
+                <button (click)="onDeleteProduct(i)" class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

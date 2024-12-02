@@ -1,0 +1,64 @@
+<div class="flex flex-col h-screen">
+  <header class="bg-blue-600 text-white py-4 px-6 shadow-md">
+    <div class="bg-[#06296b] text-white py-4 px-6">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Cadastro de Clientes</h1>
+        <a (click)="irParaProduto()">Produtos</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-gray-100 py-8 px-4">
+    <div class="login-container">
+      <form (ngSubmit)="onSaveClient()" class="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block font-medium mb-2">Nome</label>
+            <input type="text" id="name" [(ngModel)]="newClient.name" name="name" class="border rounded py-2 px-3 w-full" required>
+          </div>
+          <div>
+            <label for="cpf" class="block font-medium mb-2">CPF</label>
+            <input type="text" id="cpf" [(ngModel)]="newClient.cpf" name="cpf" class="border rounded py-2 px-3 w-full" required>
+          </div>
+          <div>
+            <label for="address" class="block font-medium mb-2">Endereço</label>
+            <input type="text" id="address" [(ngModel)]="newClient.address" name="address" class="border rounded py-2 px-3 w-full" required>
+          </div>
+          <div>
+            <label for="phone" class="block font-medium mb-2">Telefone</label>
+            <input type="tel" id="phone" [(ngModel)]="newClient.phone" name="phone" class="border rounded py-2 px-3 w-full" required>
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="bg-[#06296b] hover:bg-[#073f95] text-white font-medium py-2 px-4 rounded mt-4">Salvar</button>
+      </form>
+  
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Clientes Cadastrados</h2>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="table-auto min-w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Nome</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">CPF</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Endereço</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Telefone</th>
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clients; let i = index" class="border-b">
+              <td class="py-2 px-4">{{ client.name }}</td>
+              <td class="py-2 px-4">{{ client.cpf }}</td>
+              <td class="py-2 px-4">{{ client.address }}</td>
+              <td class="py-2 px-4">{{ client.phone }}</td>
+              <td class="py-2 px-4 text-center">
+                <button (click)="onEditClient(client)" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-1 px-3 rounded mr-2">Editar</button>
+                <button (click)="onDeleteClient(i)" class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  </div>
